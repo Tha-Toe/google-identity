@@ -8,6 +8,8 @@ const clientId =
 function App() {
   const googleButtonRef = useRef(null);
   const [user, setUser] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
+  const [idToken, setIdToken] = useState(null);
 
   useEffect(() => {
     const initClient = () => {
@@ -20,8 +22,10 @@ function App() {
   });
 
   const onSuccess = (res) => {
-    console.log("success:", res.profileObj);
+    console.log("success:", res);
     setUser(res.profileObj);
+    setAccessToken(res.accessToken);
+    setIdToken(res.tokenId);
   };
   const onFailure = (err) => {
     console.log("failed:", err);
@@ -30,6 +34,7 @@ function App() {
   const logOut = () => {
     setUser(null);
   };
+
   return (
     <div className="App">
       <h1>Google Identity Method</h1>
@@ -49,11 +54,25 @@ function App() {
         </div>
       )}{" "}
       {user && (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <h1>{user.name}</h1>
           <img src={user.imageUrl} />
           <p>{user.email}</p>
-
+          {accessToken && (
+            <div style={{ maxWidth: "100vw" }}>
+              Access Token - {accessToken}
+            </div>
+          )}
+          {idToken && (
+            <div style={{ maxWidth: "100vw" }}>idToken - {idToken}</div>
+          )}
           <div className="google-container">
             <div style={{ opacity: "0", zIndex: "10" }}>
               <GoogleLogout
