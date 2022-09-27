@@ -7,3 +7,26 @@
   align-items: center;
   justify-content: center;
 }
+
+.google-container {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  padding: 15px 40px;
+  margin-top: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.google-button {
+  position: absolute;
+  color: white;
+  font-size: 18px;
+  z-index: 5;
+  cursor: pointer;
+}
