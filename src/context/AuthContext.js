@@ -6,8 +6,18 @@ import {
   onAuthStateChanged,
   OAuthProvider,
   getIdToken,
+  GoogleAuthProvider,
 } from "firebase/auth";
+import {
+  getFirestore,
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+} from "firebase/firestore";
 import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -34,6 +44,7 @@ export const AuthContextProvider = ({ children }) => {
     }
     setUser(null);
   };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);

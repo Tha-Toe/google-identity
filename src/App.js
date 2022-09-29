@@ -4,6 +4,7 @@ import { GoogleLogin, GoogleLogout } from "@leecheuk/react-google-login";
 import { gapi } from "gapi-script";
 import { UserAuth } from "./context/AuthContext";
 import { AuthContextProvider } from "./context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const clientId =
   "555618407648-lkittruvsnt5jr327s088990pgv3bi9t.apps.googleusercontent.com";
@@ -49,6 +50,11 @@ function App() {
       console.log(error);
     }
   };
+  const navigate = useNavigate();
+  const goSignInPage = () => {
+    navigate("/login", { replace: true });
+  };
+
   return (
     <div className="App">
       <h1>Google Identity Method</h1>
@@ -69,6 +75,9 @@ function App() {
           </div>
           <button className="apple-button" onClick={handleAppleLogin}>
             Log in with apple
+          </button>
+          <button className="apple-button" onClick={goSignInPage}>
+            Signin with email
           </button>
         </>
       )}{" "}
